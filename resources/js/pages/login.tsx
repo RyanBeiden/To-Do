@@ -1,8 +1,9 @@
 import { Head, useForm } from '@inertiajs/react';
-import React from 'react';
+import React, { JSX } from 'react';
 import Logo from '../components/logo';
+import Input from '../components/input';
 
-export default function Login() {
+export default function Login(): JSX.Element {
   const { data, setData, post, processing, errors, clearErrors } = useForm({
     email: '',
     password: '',
@@ -23,46 +24,22 @@ export default function Login() {
           onSubmit={submit}
         >
           <Logo />
-          <div className="mb-6 relative">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className={
-                errors.email
-                  ? 'w-full p-2 border-red-500'
-                  : 'w-full p-2 border-gray'
-              }
-              type="text"
-              value={data.email}
-              onChange={(event) => setData('email', event.target.value)}
-              onFocus={() => clearErrors('email')}
-            />
-            {errors.email && (
-              <div className="absolute text-xs pt-0.5 text-red-500">
-                {errors.email}
-              </div>
-            )}
-          </div>
-          <div className="mb-8 relative">
-            <label htmlFor="password">Password</label>
-            <input
-              id="password"
-              className={
-                errors.password
-                  ? 'w-full p-2 border-red-500'
-                  : 'w-full p-2 border-gray'
-              }
-              type="password"
-              value={data.password}
-              onChange={(event) => setData('password', event.target.value)}
-              onFocus={() => clearErrors('password')}
-            />
-            {errors.password && (
-              <div className="absolute text-xs pt-0.5 text-red-500">
-                {errors.password}
-              </div>
-            )}
-          </div>
+          <Input
+            type="email"
+            label="Email"
+            value={data.email}
+            setValue={(value: string) => setData('email', value)}
+            error={errors.email}
+            clearErrors={() => clearErrors('email')}
+          />
+          <Input
+            type="password"
+            label="Password"
+            value={data.password}
+            setValue={(value: string) => setData('password', value)}
+            error={errors.password}
+            clearErrors={() => clearErrors('password')}
+          />
           <button type="submit" className="py-2 w-full" disabled={processing}>
             Login
           </button>
