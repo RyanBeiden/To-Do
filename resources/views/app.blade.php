@@ -8,6 +8,10 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
   />
   <link
+    rel="icon"
+    href="/logo.svg"
+  />
+  <link
     rel="preconnect"
     href="https://fonts.googleapis.com"
   >
