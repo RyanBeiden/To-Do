@@ -1,15 +1,16 @@
 @import 'tailwindcss';
 
-html, body {
+html,
+body {
   height: 100%;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
   font-weight: 700;
 }
 
 @theme {
-  --color-purple: #7C00FF;
-  --color-purple-hover: #6300CC;
-  --color-gray: #E7E7E7;
+  --color-purple: #7c00ff;
+  --color-purple-hover: #6300cc;
+  --color-gray: #e7e7e7;
 
   --input-border-width: 1.5px;
 }
