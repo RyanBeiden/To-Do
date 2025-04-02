@@ -16,7 +16,7 @@ body {
 }
 
 input {
-  border: solid var(--input-border-width) var(--color-gray);
+  border-width: var(--input-border-width);
   border-radius: var(--radius-lg);
   font-weight: normal;
 }
