@@ -1,12 +1,40 @@
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+html, body {
+  height: 100%;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+}
 
 @theme {
-  --font-sans:
-    'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --color-purple: #7C00FF;
+  --color-purple-hover: #6300CC;
+  --color-gray: #E7E7E7;
+
+  --input-border-width: 1.5px;
+}
+
+input {
+  border: solid var(--input-border-width) var(--color-gray);
+  border-radius: var(--radius-lg);
+  font-weight: normal;
+}
+
+input:focus-visible {
+  outline: solid var(--input-border-width) var(--color-purple);
+}
+
+button {
+  background-color: var(--color-purple);
+  border-radius: var(--radius-lg);
+  color: var(--color-white);
+}
+
+button:hover {
+  background-color: var(--color-purple-hover);
+  cursor: pointer;
+}
+
+.border {
+  border-width: var(--input-border-width);
 }

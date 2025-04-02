@@ -2,21 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AuthController extends Controller
 {
-    /**
-     * @return
-     */
-    public function show()
+    public function show(): Response
     {
-        return Inertia::render(
-            'welcome',
-            [
-                'user' => ['name' => 'Ryan'],
-            ]
-        );
+        return Inertia::render('welcome');
     }
 }
