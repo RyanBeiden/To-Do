@@ -1,28 +1,24 @@
-import { Head } from '@inertiajs/react';
-import React, { useState } from 'react';
+import { Head, useForm } from '@inertiajs/react';
+import React from 'react';
 import Logo from '../components/logo';
 
-export default function Welcome() {
-  const [values, setValues] = useState({
-    // @TODO: Add a type
+export default function Login() {
+  const { data, setData, post, processing } = useForm({
     email: '',
     password: '',
   });
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { id, value } = event.target;
+  function submit(event: React.FormEvent) {
+    event.preventDefault();
 
-    setValues((values) => ({
-      ...values,
-      [id]: value,
-    }));
+    post('/login');
   }
 
   return (
     <>
-      <Head title="Sign In" />
+      <Head title="Login" />
       <div className="flex justify-center items-center h-screen">
-        <form className="p-10 border border-gray rounded-lg">
+        <form className="p-10 border border-gray rounded-lg" onSubmit={submit}>
           <Logo />
           <div className="mb-3">
             <label htmlFor="email">Email</label>
@@ -30,8 +26,8 @@ export default function Welcome() {
               id="email"
               className="w-full p-2"
               type="email"
-              value={values.email}
-              onChange={handleChange}
+              value={data.email}
+              onChange={(event) => setData('email', event.target.value)}
             />
           </div>
           <div className="mb-5">
@@ -40,12 +36,12 @@ export default function Welcome() {
               id="password"
               className="w-full p-2"
               type="password"
-              value={values.password}
-              onChange={handleChange}
+              value={data.password}
+              onChange={(event) => setData('password', event.target.value)}
             />
           </div>
-          <button type="submit" className="py-2 w-full">
-            Sign In
+          <button type="submit" className="py-2 w-full" disabled={processing}>
+            Login
           </button>
         </form>
       </div>

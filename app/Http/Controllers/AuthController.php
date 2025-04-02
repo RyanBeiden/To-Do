@@ -7,8 +7,11 @@ use Inertia\Response;
 
 class AuthController extends Controller
 {
+    /**
+     * @return Response
+     */
     public function show(): Response
     {
-        return Inertia::render('welcome');
+        return Inertia::render('login');
     }
 }
