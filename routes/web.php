@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 // This route group does not require the user to be authenticated to access each route.
@@ -16,4 +17,6 @@ Route::middleware('guest')->group(function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])
         ->name('dashboard');
+    Route::post('/task', [TaskController::class, 'store'])
+        ->name('store.task');
 });
