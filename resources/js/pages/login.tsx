@@ -24,22 +24,26 @@ export default function Login(): JSX.Element {
           onSubmit={submit}
         >
           <Logo />
-          <Input
-            type="email"
-            label="Email"
-            value={data.email}
-            setValue={(value: string) => setData('email', value)}
-            error={errors.email}
-            clearErrors={() => clearErrors('email')}
-          />
-          <Input
-            type="password"
-            label="Password"
-            value={data.password}
-            setValue={(value: string) => setData('password', value)}
-            error={errors.password}
-            clearErrors={() => clearErrors('password')}
-          />
+          <div className="mb-6 relative">
+            <label htmlFor="email">Email</label>
+            <Input
+              type="email"
+              value={data.email}
+              setValue={(value: string) => setData('email', value)}
+              error={errors.email}
+              clearErrors={() => clearErrors('email')}
+            />
+          </div>
+          <div className="mb-8 relative">
+            <label htmlFor="password">Password</label>
+            <Input
+              type="password"
+              value={data.password}
+              setValue={(value: string) => setData('password', value)}
+              error={errors.password}
+              clearErrors={() => clearErrors('password')}
+            />
+          </div>
           <button type="submit" className="py-2 w-full" disabled={processing}>
             Login
           </button>

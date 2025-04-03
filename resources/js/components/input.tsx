@@ -3,18 +3,18 @@ import { IFormInput } from '../types';
 
 export default function Input({
   type,
-  label,
+  placeholder = '',
   value,
   setValue,
-  error,
-  clearErrors,
+  error = '',
+  clearErrors = () => {},
 }: IFormInput): JSX.Element {
   return (
-    <div className="mb-6 relative">
-      <label htmlFor={type}>{label}</label>
+    <>
       <input
         id={type}
         type={type === 'password' ? type : 'text'}
+        placeholder={placeholder}
         value={value}
         onChange={(event) => setValue(event.target.value)}
         onFocus={clearErrors}
@@ -25,6 +25,6 @@ export default function Input({
       {error && (
         <div className="absolute text-xs pt-0.5 text-red-500">{error}</div>
       )}
-    </div>
+    </>
   );
 }

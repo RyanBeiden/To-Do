@@ -1,6 +1,6 @@
 export interface IFormInput {
   type: string;
-  label: string;
+  placeholder?: string;
   value: string;
   setValue: (key) => void;
   error: string | undefined;
@@ -8,8 +8,8 @@ export interface IFormInput {
 }
 
 export interface IAuth {
-  auth?: {
-    role: IRole;
+  auth: {
+    role?: IRole;
     permissions: Array; // @TODO: Format based on Policies
   };
 }

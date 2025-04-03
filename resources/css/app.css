@@ -31,6 +31,10 @@ input:focus-visible {
   outline: solid var(--input-border-width) var(--color-purple);
 }
 
+input::placeholder {
+  font-style: italic;
+}
+
 button {
   background-color: var(--color-purple);
   border-radius: var(--radius-lg);
@@ -49,4 +53,19 @@ button:hover {
 .separator {
   background-color: var(--color-gray);
   height: 1.5px;
+}
+
+li > input {
+  height: 56px;
+}
+
+li > div.text-red-500 {
+  background-color: var(--color-white);
+  margin: -12px 0 0 10px;
+}
+
+button.secondary {
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-purple);
+  color: var(--color-purple);
 }
