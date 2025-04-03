@@ -15,6 +15,6 @@ export interface IAuth {
 }
 
 export interface IRole {
-  id: number,
-  name: string,
-};
+  id: number;
+  name: string;
+}
