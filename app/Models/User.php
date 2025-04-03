@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,11 +46,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
     /**
      * @return BelongsTo
      */
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
     }
 }
