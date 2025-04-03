@@ -15,24 +15,34 @@ export default function AddTask({ close }: { close: () => void }): JSX.Element {
     });
   }
 
+  function cancel(event: React.FormEvent) {
+    event.preventDefault();
+
+    close();
+  }
+
   return (
-    <li key={0} className="h-14 relative">
+    <form className="add-task h-14 relative">
       <Input
         type="task"
-        placeholder="Build next big project..."
+        placeholder="New Task"
         value={data.description}
         setValue={(value: string) => setData('description', value)}
         error={errors.description}
         clearErrors={() => clearErrors('description')}
       />
       <div className="absolute -right-0 mr-4 top-[25%]">
-        <button className="py-1.5 px-2 text-xs mr-2" onClick={submit}>
+        <button
+          type="submit"
+          className="py-1.5 px-2 text-xs mr-2"
+          onClick={submit}
+        >
           Add
         </button>
-        <button className="py-[5px] px-2 text-xs secondary" onClick={close}>
+        <button className="py-[5px] px-2 text-xs secondary" onClick={cancel}>
           Cancel
         </button>
       </div>
-    </li>
+    </form>
   );
 }

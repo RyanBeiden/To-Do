@@ -1,11 +1,35 @@
 import { Head } from '@inertiajs/react';
 import React, { JSX, useState } from 'react';
 import Logo from '../components/logo';
-import { IAuth } from '../types';
+import { IAuth, ITask } from '../types';
 import AddTask from '../components/add-task';
+import Task from '../components/task';
 
-export default function Dashboard({ auth }: IAuth): JSX.Element {
+interface DashboardProps {
+  auth: IAuth;
+  tasks: ITask[];
+}
+
+export default function Dashboard({
+  auth,
+  tasks,
+}: DashboardProps): JSX.Element {
   const [addTask, setAddTask] = useState(false);
+
+  const taskList = tasks.map((task) => (
+    <Task
+      key={task.id}
+      id={task.id}
+      description={task.description}
+      complete={task.complete}
+    />
+  ));
+
+  const roleBadge = auth.role && (
+    <span className="bg-purple-300 rounded-full py-1 px-2 text-xs">
+      <strong>{auth.role.name}</strong>
+    </span>
+  );
 
   return (
     <>
@@ -18,9 +42,7 @@ export default function Dashboard({ auth }: IAuth): JSX.Element {
         <div className="px-[15%] pt-[15%] pb-14">
           <div className="flex justify-start items-center">
             <h1 className="text-left mr-2">To-Do</h1>
-            <span className="bg-purple-300 rounded-full py-1 px-2 text-xs">
-              <strong>{auth.role && auth.role.name}</strong>
-            </span>
+            {roleBadge}
           </div>
           <div className="separator mt-3 mb-6" />
           <button
@@ -30,8 +52,8 @@ export default function Dashboard({ auth }: IAuth): JSX.Element {
             <img src="/new.svg" className="mr-0.5 w-3" /> New Task
           </button>
           <ul className="grid gap-2">
-            {addTask && <AddTask close={() => setAddTask(false)} />}
-            {/* @TODO: Loop tasks */}
+            {addTask && <AddTask key={0} close={() => setAddTask(false)} />}
+            {taskList}
           </ul>
         </div>
       </div>

@@ -31,10 +31,6 @@ input:focus-visible {
   outline: solid var(--input-border-width) var(--color-purple);
 }
 
-input::placeholder {
-  font-style: italic;
-}
-
 button {
   background-color: var(--color-purple);
   border-radius: var(--radius-lg);
@@ -55,11 +51,12 @@ button:hover {
   height: 1.5px;
 }
 
-li > input {
+form.add-task > input {
   height: 56px;
+  padding-left: 16px;
 }
 
-li > div.text-red-500 {
+form.add-task > div.text-red-500 {
   background-color: var(--color-white);
   margin: -12px 0 0 10px;
 }

@@ -7,11 +7,15 @@ export interface IFormInput {
   clearErrors: (...fields) => void;
 }
 
+export interface ITask<> {
+  id: number;
+  description: string;
+  complete: boolean;
+}
+
 export interface IAuth {
-  auth: {
-    role?: IRole;
-    permissions: Array; // @TODO: Format based on Policies
-  };
+  role?: IRole;
+  permissions: Array; // @TODO: Format based on Policies
 }
 
 export interface IRole {

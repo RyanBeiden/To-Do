@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -12,8 +13,10 @@ class DashboardController extends Controller
      *
      * @return Response
      */
-    public function show(): Response
+    public function show(Request $request): Response
     {
-        return Inertia::render('dashboard');
+        return Inertia::render('dashboard', [
+            'tasks' => fn() => $request->user()?->tasks->select('id', 'description', 'complete'),
+        ]);
     }
 }
