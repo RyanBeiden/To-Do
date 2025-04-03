@@ -8,6 +8,8 @@ use Inertia\Response;
 class DashboardController extends Controller
 {
     /**
+     * Show the user's dashboard.
+     *
      * @return Response
      */
     public function show(): Response

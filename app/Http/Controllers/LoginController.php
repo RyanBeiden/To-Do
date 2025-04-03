@@ -11,6 +11,8 @@ use Inertia\Response;
 class LoginController extends Controller
 {
     /**
+     * Show the login form.
+     *
      * @return Response
      */
     public function show(): Response
