@@ -11,7 +11,7 @@
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
         "types": "tsc --noEmit",
-        "postinstall": "npm run prod"
+        "postinstall": "vite preview"
     },
     "dependencies": {
         "@inertiajs/react": "^2.0.5",
