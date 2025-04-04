@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\Task;
 use App\Models\User;
 
@@ -12,7 +13,7 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role->isEditor();
+        return $user->hasRole(Role::EDITOR);
     }
 
     /**
@@ -21,7 +22,7 @@ class TaskPolicy
     public function update(User $user, Task $task): bool
     {
         return $user->id() === $task->userId()
-            && $user->role->isEditor();
+            && $user->hasRole(Role::EDITOR);
     }
 
     /**
@@ -30,6 +31,6 @@ class TaskPolicy
     public function delete(User $user, Task $task): bool
     {
         return $user->id() === $task->userId()
-            && $user->role->isEditor();
+            && $user->hasRole(Role::EDITOR);
     }
 }

@@ -6,8 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    private const EDITOR = 1;
-    private const READ_ONLY = 2;
+    public const EDITOR = 1;
+
+    /**
+     * @return int
+     */
+    public function id(): int
+    {
+        return $this->id;
+    }
 
     /**
      * @return string
@@ -23,13 +30,5 @@ class Role extends Model
     public function isEditor(): bool
     {
         return $this->id === static::EDITOR;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isReadOnly(): bool
-    {
-        return $this->id === static::READ_ONLY;
     }
 }

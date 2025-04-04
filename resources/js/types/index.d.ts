@@ -12,8 +12,7 @@ export interface ITask {
 }
 
 export interface IAuth {
-  role?: IRole;
-  permissions: IPermissions;
+  role: IRole;
 }
 
 export interface IPermissions {
@@ -23,6 +22,6 @@ export interface IPermissions {
 }
 
 export interface IRole {
-  id: number;
-  name: string;
+  name?: string;
+  canEdit: boolean;
 }

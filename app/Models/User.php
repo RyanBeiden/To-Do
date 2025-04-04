@@ -56,6 +56,16 @@ class User extends Authenticatable
     }
 
     /**
+     * @param int $role
+     * 
+     * @return bool
+     */
+    public function hasRole(int $role): bool
+    {
+        return !empty($this->role) && $this->role->id() === $role;
+    }
+
+    /**
      * @return BelongsTo
      */
     public function role(): BelongsTo

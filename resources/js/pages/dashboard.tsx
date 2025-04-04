@@ -16,7 +16,7 @@ export default function Dashboard({
 }: DashboardProps): JSX.Element {
   const [addTask, setAddTask] = useState(false);
 
-  const { task: taskPermission } = auth.permissions;
+  const { canEdit, name: roleName } = auth.role;
 
   const { data, setData, reset, post, errors, clearErrors } = useForm({
     description: '',
@@ -41,17 +41,17 @@ export default function Dashboard({
       id={task.id}
       description={task.description}
       complete={task.complete}
-      canEdit={taskPermission.can_edit}
+      canEdit={canEdit}
     />
   ));
 
-  const roleBadge = auth.role && (
+  const roleBadge = roleName && (
     <span className="bg-purple-300 rounded-full py-1 px-2 text-xs">
-      <strong>{auth.role.name}</strong>
+      <strong>{roleName}</strong>
     </span>
   );
 
-  const newTaskButton = taskPermission.can_edit ? (
+  const newTaskButton = canEdit ? (
     <button
       className="flex items-center py-1.5 px-2 mb-6 text-xs"
       onClick={() => setAddTask(true)}
