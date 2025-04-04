@@ -7,7 +7,14 @@ import TaskAction from './task-action';
 export default function Task({ ...task }: ITask): JSX.Element {
   const [editing, setEditing] = useState(false);
 
-  const { data, setData, put, errors, clearErrors } = useForm({
+  const {
+    data,
+    setData,
+    put,
+    delete: destroy,
+    errors,
+    clearErrors,
+  } = useForm({
     id: task.id,
     complete: task.complete,
     description: task.description,
@@ -16,7 +23,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
   // @TODO: Change this to `can` after adding Policies.
   // const { auth } = usePage().props;
 
-  function updateCompleteStatus(complete: boolean) {
+  function completeTask(complete: boolean) {
     setData('complete', complete);
 
     // I was having trouble ensuring setData() completed before the PUT request,
@@ -24,7 +31,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
     router.put(route('update.task', task.id), { ...task, complete });
   }
 
-  function submitEdit(event: React.FormEvent) {
+  function editTask(event: React.FormEvent) {
     event.preventDefault();
 
     put(route('update.task', task.id), {
@@ -36,6 +43,10 @@ export default function Task({ ...task }: ITask): JSX.Element {
     setData('description', task.description);
 
     setEditing(false);
+  }
+
+  function deleteTask() {
+    destroy(route('delete.task', task.id));
   }
 
   return (
@@ -52,7 +63,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
             <Checkbox
               id={data.id}
               checked={data.complete}
-              setValue={(value) => updateCompleteStatus(value)}
+              setValue={(value) => completeTask(value)}
             />
             <strong
               className={data.complete ? 'line-through text-gray-200' : ''}
@@ -66,7 +77,11 @@ export default function Task({ ...task }: ITask): JSX.Element {
               className="w-4 h-4 cursor-pointer"
               onClick={() => setEditing(true)}
             />
-            <img src="/delete.svg" className="w-4 h-4 cursor-pointer" />
+            <img
+              src="/delete.svg"
+              className="w-4 h-4 cursor-pointer"
+              onClick={() => deleteTask()}
+            />
           </div>
         </li>
       )}
@@ -78,7 +93,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
           setValue={(value) => setData('description', value)}
           error={errors.description}
           clearErrors={() => clearErrors('description')}
-          submit={(event: React.FormEvent) => submitEdit(event)}
+          submit={(event: React.FormEvent) => editTask(event)}
           close={() => cancel()}
         />
       )}

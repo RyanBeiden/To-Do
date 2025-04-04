@@ -44,4 +44,18 @@ class TaskController extends Controller
 
         return back();
     }
+
+    /**
+     * Soft delete a task for the user.
+     *
+     * @param Request $request
+     * 
+     * @return RedirectResponse
+     */
+    public function destroy(Task $task): RedirectResponse
+    {
+        $task->delete();
+
+        return back();
+    }
 }

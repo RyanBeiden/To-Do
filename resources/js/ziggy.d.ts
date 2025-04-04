@@ -5,7 +5,19 @@ declare module 'ziggy-js' {
     authenticate: [];
     dashboard: [];
     'store.task': [];
-    'update.task': [];
+    'update.task': [
+      {
+        name: 'task';
+        required: true;
+        binding: 'id';
+      },
+    ];
+    'delete.task': [
+      {
+        name: 'task';
+        required: true;
+      },
+    ];
     'storage.local': [
       {
         name: 'path';
