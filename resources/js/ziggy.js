@@ -19,6 +19,7 @@ const Ziggy = {
       parameters: ['task'],
       bindings: { task: 'id' },
     },
+    logout: { uri: 'logout', methods: ['POST'] },
     'storage.local': {
       uri: 'storage/{path}',
       methods: ['GET', 'HEAD'],

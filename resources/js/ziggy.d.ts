@@ -19,6 +19,7 @@ declare module 'ziggy-js' {
         binding: 'id';
       },
     ];
+    logout: [];
     'storage.local': [
       {
         name: 'path';

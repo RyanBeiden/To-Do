@@ -15,25 +15,13 @@ export default function Dashboard({
   tasks,
 }: DashboardProps): JSX.Element {
   const [addTask, setAddTask] = useState(false);
+  const [accountOptions, setAccountOptions] = useState(false);
 
   const { canEdit, name: roleName } = auth.role;
 
   const { data, setData, reset, post, errors, clearErrors } = useForm({
     description: '',
   });
-
-  function submit(event: React.FormEvent) {
-    event.preventDefault();
-
-    post(route('store.task'), {
-      onSuccess: () => close(),
-    });
-  }
-
-  function close() {
-    reset('description');
-    setAddTask(false);
-  }
 
   const taskList = tasks.map((task) => (
     <Task
@@ -64,13 +52,46 @@ export default function Dashboard({
     </button>
   );
 
+  function submit(event: React.FormEvent) {
+    event.preventDefault();
+
+    post(route('store.task'), {
+      onSuccess: () => close(),
+    });
+  }
+
+  function close() {
+    reset('description');
+    setAddTask(false);
+  }
+
+  function logout() {
+    post(route('logout'));
+  }
+
   return (
     <>
       <Head title="Dashboard" />
       <div className="grid grid-rows-[max-content_1fr] h-screen">
         <header className="flex justify-between p-4 items-start sticky top-0">
           <Logo />
-          <div>User Icon Here</div>
+          <div className="relative">
+            <img
+              src="/account.svg"
+              className="w-8 h-8 cursor-pointer"
+              onClick={() => setAccountOptions(!accountOptions)}
+            />
+            {accountOptions && (
+              <div>
+                <button
+                  className="py-1.5 px-2 mt-2 text-xs absolute right-0"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
         </header>
         <div className="px-[15%] pt-[15%] pb-14">
           <div className="flex justify-start items-center">

@@ -27,4 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])
         ->can('delete', 'task')
         ->name('delete.task');
+
+    Route::post('/logout', [LoginController::class, 'logout'])
+        ->name('logout');
 });
