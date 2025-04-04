@@ -1,4 +1,4 @@
-# todoList
+# To-Do
 
 ## Installation
 
