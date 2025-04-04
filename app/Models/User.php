@@ -48,6 +48,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return int
+     */
+    public function id(): int
+    {
+        return $this->id;
+    }
+
+    /**
      * @return BelongsTo
      */
     public function role(): BelongsTo

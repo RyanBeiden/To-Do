@@ -13,4 +13,12 @@ class Task extends Model
      * @var array
      */
     protected $fillable = ['description', 'complete'];
+
+    /**
+     * @return int
+     */
+    public function userId(): int
+    {
+        return $this->user_id;
+    }
 }
