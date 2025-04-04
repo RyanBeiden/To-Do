@@ -41,14 +41,24 @@ export default function Task({ ...task }: ITask): JSX.Element {
   return (
     <>
       {!editing && (
-        <li className="w-full border border-gray rounded-lg h-14 flex justify-between items-center px-4 text-xs">
+        <li
+          className={
+            data.complete
+              ? 'w-full border bg-gray-50 border-gray rounded-lg h-14 flex justify-between items-center px-4 text-xs'
+              : 'w-full border border-gray rounded-lg h-14 flex justify-between items-center px-4 text-xs'
+          }
+        >
           <div className="flex items-center">
             <Checkbox
               id={data.id}
               checked={data.complete}
               setValue={(value) => updateCompleteStatus(value)}
             />
-            <strong>{data.description}</strong>
+            <strong
+              className={data.complete ? 'line-through text-gray-200' : ''}
+            >
+              {data.description}
+            </strong>
           </div>
           <div className="flex gap-4">
             <img

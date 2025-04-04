@@ -13,6 +13,8 @@ body {
   --color-purple-hover: #6300cc;
   --color-purple-300: #dccdff;
   --color-gray: #e7e7e7;
+  --color-gray-50: #f6f6f6;
+  --color-gray-200: #b0b0b0;
 
   --input-border-width: 1.5px;
 }
