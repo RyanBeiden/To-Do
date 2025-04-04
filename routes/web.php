@@ -17,6 +17,8 @@ Route::middleware('guest')->group(function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])
         ->name('dashboard');
-    Route::post('/task', [TaskController::class, 'store'])
+    Route::post('/tasks', [TaskController::class, 'store'])
         ->name('store.task');
+    Route::put('/tasks/{task}', [TaskController::class, 'update'])
+        ->name('update.task');
 });

@@ -15,8 +15,11 @@ class DashboardController extends Controller
      */
     public function show(Request $request): Response
     {
+        // This could eventually cause long loadtimes when the task count gets high.
+        // I would consider implementing something like WhenVisible so only the data
+        // visible on the viewport loads.
         return Inertia::render('dashboard', [
-            'tasks' => fn() => $request->user()?->tasks->select('id', 'description', 'complete'),
+            'tasks' => fn() => $request->user()?->tasks,
         ]);
     }
 }

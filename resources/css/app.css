@@ -31,6 +31,10 @@ input:focus-visible {
   outline: solid var(--input-border-width) var(--color-purple);
 }
 
+input[type='checkbox'] {
+  border-radius: var(--radius-sm);
+}
+
 button {
   background-color: var(--color-purple);
   border-radius: var(--radius-lg);
@@ -51,12 +55,12 @@ button:hover {
   height: 1.5px;
 }
 
-form.add-task > input {
+form.task-action > input {
   height: 56px;
   padding-left: 16px;
 }
 
-form.add-task > div.text-red-500 {
+form.task-action > div.text-red-500 {
   background-color: var(--color-white);
   margin: -12px 0 0 10px;
 }

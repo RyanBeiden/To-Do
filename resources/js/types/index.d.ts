@@ -1,3 +1,9 @@
+import { route as routeFn } from 'ziggy-js';
+
+declare global {
+  const route: typeof routeFn;
+}
+
 export interface IFormInput {
   type: string;
   placeholder?: string;
@@ -5,6 +11,12 @@ export interface IFormInput {
   setValue: (key) => void;
   error: string | undefined;
   clearErrors: (...fields) => void;
+}
+
+export interface ICheckbox {
+  id: number;
+  checked: boolean;
+  setValue: (key) => void;
 }
 
 export interface ITask<> {

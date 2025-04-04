@@ -60,6 +60,9 @@ class User extends Authenticatable
      */
     public function tasks(): HasMany
     {
-        return $this->hasMany(Task::class)->orderBy('complete');
+        return $this->hasMany(Task::class)->orderBy('description');
+
+        // I was ordering, but did not liek the delay before reording after checking off tasks.
+        // return $this->hasMany(Task::class)->orderBy('complete');
     }
 }

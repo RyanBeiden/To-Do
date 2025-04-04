@@ -1,9 +1,9 @@
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import React, { JSX, useState } from 'react';
 import Logo from '../components/logo';
 import { IAuth, ITask } from '../types';
-import AddTask from '../components/add-task';
 import Task from '../components/task';
+import TaskAction from '../components/task-action';
 
 interface DashboardProps {
   auth: IAuth;
@@ -15,6 +15,18 @@ export default function Dashboard({
   tasks,
 }: DashboardProps): JSX.Element {
   const [addTask, setAddTask] = useState(false);
+
+  const { data, setData, post, errors, clearErrors } = useForm({
+    description: '',
+  });
+
+  function submit(event: React.FormEvent) {
+    event.preventDefault();
+
+    post(route('store.task'), {
+      onSuccess: () => setAddTask(false),
+    });
+  }
 
   const taskList = tasks.map((task) => (
     <Task
@@ -35,7 +47,7 @@ export default function Dashboard({
     <>
       <Head title="Dashboard" />
       <div className="grid grid-rows-[max-content_1fr] h-screen">
-        <header className="flex justify-between m-4 items-start">
+        <header className="flex justify-between p-4 items-start sticky top-0">
           <Logo />
           <div>User Icon Here</div>
         </header>
@@ -52,7 +64,18 @@ export default function Dashboard({
             <img src="/new.svg" className="mr-0.5 w-3" /> New Task
           </button>
           <ul className="grid gap-2">
-            {addTask && <AddTask key={0} close={() => setAddTask(false)} />}
+            {addTask && (
+              <TaskAction
+                key={0}
+                actionText="Add"
+                value={data.description}
+                setValue={(value) => setData('description', value)}
+                error={errors.description}
+                clearErrors={() => clearErrors('description')}
+                submit={(event: React.FormEvent) => submit(event)}
+                close={() => setAddTask(false)}
+              />
+            )}
             {taskList}
           </ul>
         </div>
