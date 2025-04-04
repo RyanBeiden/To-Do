@@ -16,7 +16,7 @@ export default function Dashboard({
 }: DashboardProps): JSX.Element {
   const [addTask, setAddTask] = useState(false);
 
-  const { data, setData, post, errors, clearErrors } = useForm({
+  const { data, setData, reset, post, errors, clearErrors } = useForm({
     description: '',
   });
 
@@ -24,8 +24,13 @@ export default function Dashboard({
     event.preventDefault();
 
     post(route('store.task'), {
-      onSuccess: () => setAddTask(false),
+      onSuccess: () => close(),
     });
+  }
+
+  function close() {
+    reset('description');
+    setAddTask(false);
   }
 
   const taskList = tasks.map((task) => (
@@ -73,7 +78,7 @@ export default function Dashboard({
                 error={errors.description}
                 clearErrors={() => clearErrors('description')}
                 submit={(event: React.FormEvent) => submit(event)}
-                close={() => setAddTask(false)}
+                close={() => close()}
               />
             )}
             {taskList}

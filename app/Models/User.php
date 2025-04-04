@@ -60,9 +60,8 @@ class User extends Authenticatable
      */
     public function tasks(): HasMany
     {
-        return $this->hasMany(Task::class)->orderBy('description');
-
-        // I was ordering, but did not liek the delay before reording after checking off tasks.
-        // return $this->hasMany(Task::class)->orderBy('complete');
+        // I was ordering by completed tasks, but there is a delay between
+        // updating tasks and getting them again with an updated order, so I opted for creation date.
+        return $this->hasMany(Task::class)->orderByDesc('created_at');
     }
 }

@@ -12,7 +12,7 @@ export default function Login(): JSX.Element {
   function submit(event: React.FormEvent) {
     event.preventDefault();
 
-    post('/login');
+    post(route('authenticate'));
   }
 
   return (

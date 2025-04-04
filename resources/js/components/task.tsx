@@ -10,6 +10,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
   const {
     data,
     setData,
+    reset,
     put,
     delete: destroy,
     errors,
@@ -40,8 +41,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
   }
 
   function cancel() {
-    setData('description', task.description);
-
+    reset('description');
     setEditing(false);
   }
 
