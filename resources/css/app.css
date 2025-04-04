@@ -48,6 +48,15 @@ button:hover {
   cursor: pointer;
 }
 
+button.disabled {
+  background-color: var(--color-gray);
+  color: var(--color-gray-200);
+}
+
+button.disabled:hover {
+  cursor: not-allowed;
+}
+
 .border {
   border-width: var(--input-border-width);
 }

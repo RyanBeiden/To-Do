@@ -1,25 +1,26 @@
 const Ziggy = {
-  url: 'http:\/\/localhost',
+  url: 'http://localhost',
   port: null,
   defaults: {},
   routes: {
-    login: { uri: '\/', methods: ['GET', 'HEAD'] },
+    login: { uri: '/', methods: ['GET', 'HEAD'] },
     authenticate: { uri: 'login', methods: ['POST'] },
     dashboard: { uri: 'dashboard', methods: ['GET', 'HEAD'] },
     'store.task': { uri: 'tasks', methods: ['POST'] },
     'update.task': {
-      uri: 'tasks\/{task}',
+      uri: 'tasks/{task}',
       methods: ['PUT'],
       parameters: ['task'],
       bindings: { task: 'id' },
     },
     'delete.task': {
-      uri: 'tasks\/{task}',
+      uri: 'tasks/{task}',
       methods: ['DELETE'],
       parameters: ['task'],
+      bindings: { task: 'id' },
     },
     'storage.local': {
-      uri: 'storage\/{path}',
+      uri: 'storage/{path}',
       methods: ['GET', 'HEAD'],
       wheres: { path: '.*' },
       parameters: ['path'],

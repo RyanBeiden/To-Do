@@ -16,6 +16,7 @@ declare module 'ziggy-js' {
       {
         name: 'task';
         required: true;
+        binding: 'id';
       },
     ];
     'storage.local': [

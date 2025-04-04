@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -39,7 +40,14 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'role' => fn() => $request->user()?->role,
-                'permissions' => fn() => [], // Policies based on role here,
+                'permissions' => fn() => [
+                    'task' => [
+                        // I was unable to add the Update/Delete policies since they expect
+                        // a specific task model, which I don't have since I render all
+                        // user tasks vs. having a route return one task at a time.
+                        'can_edit' => $request->user()->can('create', Task::class),
+                    ],
+                ],
             ],
         ];
     }

@@ -1,5 +1,5 @@
 import React, { JSX, useState } from 'react';
-import { IAuth, ITask } from '../types';
+import { ITask } from '../types';
 import Checkbox from './checkbox';
 import { router, useForm } from '@inertiajs/react';
 import TaskAction from './task-action';
@@ -20,9 +20,6 @@ export default function Task({ ...task }: ITask): JSX.Element {
     complete: task.complete,
     description: task.description,
   });
-
-  // @TODO: Change this to `can` after adding Policies.
-  // const { auth } = usePage().props;
 
   function completeTask(complete: boolean) {
     setData('complete', complete);
@@ -64,6 +61,7 @@ export default function Task({ ...task }: ITask): JSX.Element {
               id={data.id}
               checked={data.complete}
               setValue={(value) => completeTask(value)}
+              canUpdate={task.canEdit}
             />
             <strong
               className={data.complete ? 'line-through text-gray-200' : ''}
@@ -71,18 +69,20 @@ export default function Task({ ...task }: ITask): JSX.Element {
               {data.description}
             </strong>
           </div>
-          <div className="flex gap-4">
-            <img
-              src="/edit.svg"
-              className="w-4 h-4 cursor-pointer"
-              onClick={() => setEditing(true)}
-            />
-            <img
-              src="/delete.svg"
-              className="w-4 h-4 cursor-pointer"
-              onClick={() => deleteTask()}
-            />
-          </div>
+          {task.canEdit && (
+            <div className="flex gap-4">
+              <img
+                src="/edit.svg"
+                className="w-4 h-4 cursor-pointer"
+                onClick={() => setEditing(true)}
+              />
+              <img
+                src="/delete.svg"
+                className="w-4 h-4 cursor-pointer"
+                onClick={() => deleteTask()}
+              />
+            </div>
+          )}
         </li>
       )}
       {editing && (

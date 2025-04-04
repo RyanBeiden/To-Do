@@ -1,5 +1,13 @@
 import React, { JSX } from 'react';
-import { IFormInput } from '../types';
+
+interface InputProps {
+  type: string;
+  placeholder?: string;
+  value: string;
+  setValue: (key: string) => void;
+  error: string | undefined;
+  clearErrors: () => void;
+}
 
 export default function Input({
   type,
@@ -8,7 +16,7 @@ export default function Input({
   setValue,
   error = '',
   clearErrors = () => {},
-}: IFormInput): JSX.Element {
+}: InputProps): JSX.Element {
   return (
     <>
       <input

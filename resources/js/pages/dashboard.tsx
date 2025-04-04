@@ -16,6 +16,8 @@ export default function Dashboard({
 }: DashboardProps): JSX.Element {
   const [addTask, setAddTask] = useState(false);
 
+  const { task: taskPermission } = auth.permissions;
+
   const { data, setData, reset, post, errors, clearErrors } = useForm({
     description: '',
   });
@@ -39,6 +41,7 @@ export default function Dashboard({
       id={task.id}
       description={task.description}
       complete={task.complete}
+      canEdit={taskPermission.can_edit}
     />
   ));
 
@@ -46,6 +49,19 @@ export default function Dashboard({
     <span className="bg-purple-300 rounded-full py-1 px-2 text-xs">
       <strong>{auth.role.name}</strong>
     </span>
+  );
+
+  const newTaskButton = taskPermission.can_edit ? (
+    <button
+      className="flex items-center py-1.5 px-2 mb-6 text-xs"
+      onClick={() => setAddTask(true)}
+    >
+      <img src="/new.svg" className="mr-0.5 w-3 text-gray-200" /> New Task
+    </button>
+  ) : (
+    <button className="flex items-center py-1.5 px-2 mb-6 text-xs disabled">
+      <img src="/new-disabled.svg" className="mr-0.5 w-3" /> New Task
+    </button>
   );
 
   return (
@@ -62,12 +78,7 @@ export default function Dashboard({
             {roleBadge}
           </div>
           <div className="separator mt-3 mb-6" />
-          <button
-            className="flex items-center py-1.5 px-2 mb-6 text-xs"
-            onClick={() => setAddTask(true)}
-          >
-            <img src="/new.svg" className="mr-0.5 w-3" /> New Task
-          </button>
+          {newTaskButton}
           <ul className="grid gap-2">
             {addTask && (
               <TaskAction

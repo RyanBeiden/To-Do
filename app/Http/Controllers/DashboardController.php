@@ -19,7 +19,7 @@ class DashboardController extends Controller
         // I would consider implementing something like WhenVisible so only the data
         // visible on the viewport loads.
         return Inertia::render('dashboard', [
-            'tasks' => fn() => $request->user()?->tasks,
+            'tasks' => fn() => $request->user()?->tasks->select('id', 'description', 'complete'),
         ]);
     }
 }
